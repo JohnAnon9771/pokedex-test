@@ -13,13 +13,11 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-  /* background: blue; */
   height: 100%;
-  section {
-    /* background: red; */
-    flex: 1;
+  > section {
+    flex: 1 1 150px;
     div {
       h2 {
         margin: 15px 0;
@@ -33,11 +31,19 @@ const Content = styled.div`
   .details {
     background: #eee;
     width: 100%;
+    max-width: 65%;
     height: 100%;
     padding: 20px;
     border-radius: 15px;
-    flex: 2;
+    margin-left: 20px;
+    flex: 2 2 400px;
   }
 `;
 
-export { Container, Content };
+const Grid = styled.div`
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+`;
+
+export { Container, Content, Grid };
