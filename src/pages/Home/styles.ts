@@ -9,17 +9,35 @@ const Container = styled.div`
   padding: 40px;
   margin: 0 auto;
   z-index: 1;
+`;
 
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* background: blue; */
+  height: 100%;
   section {
+    /* background: red; */
+    flex: 1;
     div {
-      > strong {
-        margin-bottom: 50px;
-        font-size: 18px;
+      h2 {
+        margin: 15px 0;
+      }
+      p {
+        font-size: 14px;
       }
     }
   }
-`;
 
-const Content = styled.div``;
+  .details {
+    background: #eee;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    flex: 2;
+  }
+`;
 
 export { Container, Content };
