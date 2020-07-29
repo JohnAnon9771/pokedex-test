@@ -2,20 +2,25 @@ import React, { useEffect, useState } from 'react';
 
 import api from '../../services/api';
 import Card from './components/Card';
+import Pagination from './components/Pagination';
 import Search from './components/Search';
 import { Container, Content, Grid } from './styles';
 
 interface Pokemons {
+  count: number;
   results: { name: string }[];
 }
 
 const Home: React.FC = () => {
   const [pokemons, setPokemons] = useState<Pokemons>({} as Pokemons);
+  const [search, setSearch] = useState<string | number>('');
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     async function getPokemons() {
-      const response = await api.get('pokemon', {
+      const searchFormated =
+        typeof search === 'string' ? search.toLowerCase() : search;
+      const response = await api.get(`pokemon/${searchFormated}`, {
         params: {
           offset,
           limit: 9,
@@ -24,7 +29,7 @@ const Home: React.FC = () => {
       setPokemons(response.data);
     }
     getPokemons();
-  }, [offset]);
+  }, [offset, search]);
 
   return (
     <Container>
@@ -36,16 +41,14 @@ const Home: React.FC = () => {
               Conheça mais desse mundo incrível dos
               <strong> Pokemons</strong>
             </p>
-            <Search />
+            <Search {...{ setSearch }} />
           </div>
           <Grid>
             {pokemons.results?.map(({ name }, index) => (
               <Card key={index} {...{ name }} />
             ))}
           </Grid>
-          <button type="button" onClick={() => setOffset(offset + 1)}>
-            {offset}
-          </button>
+          <Pagination {...{ offset, setOffset }} count={142} />
         </section>
         <section className="details" />
       </Content>
