@@ -42,8 +42,10 @@ const Content = styled.div`
 
 const Grid = styled.div`
   display: grid;
+  /* background: red; */
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-rows: repeat(1fr, 3);
 `;
 
 export { Container, Content, Grid };

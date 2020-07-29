@@ -6,11 +6,11 @@ import Search from './components/Search';
 import { Container, Content, Grid } from './styles';
 
 interface Pokemons {
-  results: { name: string; url: string }[];
+  results: { name: string }[];
 }
 
 const Home: React.FC = () => {
-  const [pokemons, setPokemons] = useState<Pokemons | undefined>();
+  const [pokemons, setPokemons] = useState<Pokemons>({} as Pokemons);
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       const response = await api.get('pokemon', {
         params: {
           offset,
-          limit: 10,
+          limit: 9,
         },
       });
       setPokemons(response.data);
@@ -39,8 +39,8 @@ const Home: React.FC = () => {
             <Search />
           </div>
           <Grid>
-            {pokemons?.results?.map(({ name, url }, index) => (
-              <Card key={index} {...{ name, url }} />
+            {pokemons.results?.map(({ name }, index) => (
+              <Card key={index} {...{ name }} />
             ))}
           </Grid>
           <button type="button" onClick={() => setOffset(offset + 1)}>
