@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import api from '../../../../services/api';
 import { elementTypes } from '../../../../utils/elementTypes';
 import { capitalize } from '../../../../utils/functions/capitalize';
-import { Container, Types, Dot } from './styles';
+import { Container, Types, Dot, ImageBlock } from './styles';
 
 interface CardComponentProps {
   name: string;
@@ -11,6 +11,8 @@ interface CardComponentProps {
 
 interface PokemonDataProps {
   id: number;
+  height: number;
+  width: number;
   types: {
     slot: number;
     type: {
@@ -44,6 +46,20 @@ const Card: React.FC<CardComponentProps> = ({ name }: CardComponentProps) => {
           <Dot key={index} style={{ background: elementTypes[type?.name] }} />
         ))}
       </Types>
+
+      <ImageBlock>
+        <div>
+          <p>
+            Height:
+            {pokemonData.height}
+            <span>m</span>
+          </p>
+        </div>
+        <img
+          src={require(`../../../../assets/static/${capitalize(name)}.gif`)}
+          alt=""
+        />
+      </ImageBlock>
     </Container>
   );
 };

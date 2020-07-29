@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.div<{ border?: string }>`
+const Container = styled.div<{ border: string }>`
   background: rgba(82, 83, 87, 0.4);
   border-radius: 15px;
   height: 115px;
@@ -41,4 +41,28 @@ const Dot = styled.div`
   border-radius: 50px;
 `;
 
-export { Container, Types, Dot };
+const ImageBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 64px;
+
+  div {
+    position: absolute;
+    p {
+      font-size: 12px;
+    }
+  }
+
+  img {
+    width: auto;
+    height: auto;
+    max-width: 60px;
+    border: none;
+    margin-bottom: 5px;
+    transition: 150ms;
+  }
+`;
+
+export { Container, Types, Dot, ImageBlock };
