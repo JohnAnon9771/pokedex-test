@@ -55,6 +55,7 @@
 
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-indent": "off",
     // "react/jsx-one-expression-per-line": "off",
     "prefer-object-spread": "off",
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],

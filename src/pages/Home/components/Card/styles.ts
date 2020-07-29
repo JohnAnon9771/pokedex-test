@@ -4,7 +4,7 @@ const Container = styled.div<{ border: string }>`
   background: rgba(82, 83, 87, 0.4);
   border-radius: 15px;
   height: 115px;
-  width: 135px;
+  width: 100%;
   padding: 12px;
   transition: 150ms;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
@@ -24,7 +24,9 @@ const Container = styled.div<{ border: string }>`
       transform: scale(1.3) translate(5px, -3px);
     }
   }
+`;
 
+const Content = styled.div`
   p {
     margin-bottom: 5px;
   }
@@ -44,13 +46,13 @@ const Dot = styled.div`
 const ImageBlock = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   height: 64px;
 
   div {
-    position: absolute;
-    p {
+    margin-top: 20px;
+    .aboutPokemon {
       font-size: 12px;
     }
   }
@@ -65,4 +67,4 @@ const ImageBlock = styled.div`
   }
 `;
 
-export { Container, Types, Dot, ImageBlock };
+export { Container, Types, Dot, ImageBlock, Content };
