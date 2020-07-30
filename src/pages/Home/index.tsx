@@ -16,8 +16,6 @@ interface Pokemons {
 interface DetailsPokemons {
   id: number;
   name: string;
-  height: number;
-  width: number;
   types: {
     slot: number;
     type: {
@@ -38,7 +36,7 @@ const Home: React.FC = () => {
     async function getPokemons() {
       try {
         const searchFormated =
- typeof search === 'string' ? search.toLowerCase() : search;
+          typeof search === 'string' ? search.toLowerCase() : search;
         const response = await api.get(`pokemon/${searchFormated}`, {
           params: {
             offset,
@@ -70,7 +68,7 @@ const Home: React.FC = () => {
           </div>
           <Grid>
             {pokemons.results?.map(({ name }, index) => (
-              <Card key={index} {...{ name }} />
+              <Card key={index} {...{ name, setPokemon }} />
             ))}
           </Grid>
           <Pagination {...{ offset, setOffset }} count={142} />

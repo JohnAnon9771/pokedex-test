@@ -10,13 +10,7 @@ import {
 
 interface CardComponentProps {
   name: string;
-  // setPokemon: (value: {
-  //   id: number;
-  //   name: string;
-  //   types: {
-  //     name: string;
-  //   };
-  // }) => void;
+  setPokemon: (value: PokemonDataProps) => void;
 }
 
 interface PokemonDataProps {
@@ -34,8 +28,8 @@ interface PokemonDataProps {
 
 const Card: React.FC<CardComponentProps> = ({
   name,
-}: // setPokemon,
-CardComponentProps) => {
+  setPokemon,
+}: CardComponentProps) => {
   const [pokemonData, setPokemonData] = useState<PokemonDataProps>(
     {} as PokemonDataProps,
   );
@@ -44,14 +38,14 @@ CardComponentProps) => {
     async function getPokemon() {
       const response = await api.get(`pokemon/${name}`);
       setPokemonData(response.data);
-      // setPokemon(response.data);
     }
     getPokemon();
+    setPokemon(pokemonData);
   }, [name]);
 
   return (
     <Container
-      // onClick={() => setPokemon(pokemonData)}
+      onClick={() => setPokemon(pokemonData)}
       border={
         pokemonData.types && elementTypes[pokemonData.types[0]?.type.name]
       }
