@@ -1,7 +1,8 @@
 import React from 'react';
 
+import { elementTypes } from '../../../../utils/elementTypes';
 import { capitalize } from '../../../../utils/functions/capitalize';
-import { Container, Header, Content } from './styles';
+import { Container, Header, Content, Types, Main } from './styles';
 
 interface DetailsComponentProps {
   pokemon: {
@@ -26,6 +27,16 @@ const Details: React.FC<DetailsComponentProps> = ({
         <span>{pokemon?.id}</span>
         <h1>{pokemonNameCapitalized}</h1>
       </Header>
+      <Main>
+        <h3>Types</h3>
+        <div>
+          {pokemon?.types?.map((item) => (
+            <Types color={elementTypes[item.type?.name]}>
+              <p>{capitalize(item.type?.name)}</p>
+            </Types>
+          ))}
+        </div>
+      </Main>
       <Content>
         {pokemon?.name && (
           <img
