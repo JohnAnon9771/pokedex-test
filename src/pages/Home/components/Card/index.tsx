@@ -11,7 +11,7 @@ interface CardComponentProps {
   setPokemon: (value: PokemonDataProps) => void;
 }
 
-interface PokemonDataProps {
+export interface PokemonDataProps {
   id: number;
   name: string;
   height: number;
@@ -22,12 +22,19 @@ interface PokemonDataProps {
       name: string;
     };
   }[];
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+    };
+  }[];
 }
 
-const Card: React.FC<CardComponentProps & PokemonDataProps> = ({
+const Card: React.FC<CardComponentProps> = ({
   name,
   setPokemon,
-}: CardComponentProps & PokemonDataProps) => {
+}: CardComponentProps) => {
   const [data, setData] = useState<PokemonDataProps>({} as PokemonDataProps);
 
   useEffect(() => {

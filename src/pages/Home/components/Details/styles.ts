@@ -31,8 +31,9 @@ export const Header = styled.div`
 
 export const Footer = styled.div`
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-start;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
   align-items: flex-end;
   height: 365px;
   width: auto;

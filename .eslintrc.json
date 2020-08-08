@@ -38,7 +38,7 @@
   ],
   "rules": {
     "prettier/prettier": "error",
-    
+
     "react/jsx-filename-extension": [
       "error",
       { "extensions": [".tsx", ".ts"] }
@@ -57,12 +57,11 @@
           ["/^react/"],
           ["builtin", "external", "internal"],
           "/^@/",
-          ["parent", "sibling", "index"],
+          ["parent", "sibling", "index"]
         ],
-        "alphabetize": { "order": "asc", "ignoreCase": true },
-      },
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
     ],
-
 
     "prefer-object-spread": "off",
 
@@ -75,19 +74,19 @@
     // "import/extensions": "off",
     // "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
-    "implicit-arrow-linebreak": "off",    
-    
-    "comma-dangle": "off",    
-    "indent": "off",    
+    "implicit-arrow-linebreak": "off",
+
+    "comma-dangle": "off",
+    "indent": "off",
     "object-curly-newline": "off"
   },
   "settings": {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"],
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
-      "typescript": {},
-    },
+      "typescript": {}
+    }
   }
 }

@@ -3,18 +3,11 @@ import React from 'react';
 import { elementTypes } from '../../../../utils/elementTypes';
 import { capitalize } from '../../../../utils/functions/capitalize';
 import { Container, Header, Footer, Types, Main } from './styles';
+import Chart from './components/Chart';
+import { PokemonDataProps } from '../Card';
 
 interface DetailsComponentProps {
-  pokemon: {
-    id: number;
-    name: string;
-    types: {
-      slot: number;
-      type: {
-        name: string;
-      };
-    }[];
-  };
+  pokemon: PokemonDataProps;
 }
 
 const Details: React.FC<DetailsComponentProps> = ({
@@ -43,6 +36,7 @@ const Details: React.FC<DetailsComponentProps> = ({
           ))}
         </div>
       </Main>
+      <Chart data={pokemon} />
       <Footer>{pokemonImage}</Footer>
     </Container>
   );

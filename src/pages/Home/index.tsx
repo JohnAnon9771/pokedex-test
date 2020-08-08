@@ -2,34 +2,21 @@ import React, { useEffect, useState } from 'react';
 
 import pokeball from '../../assets/pokeball.gif';
 import api from '../../services/api';
-import Card from './components/Card';
 import Details from './components/Details';
+import Card, { PokemonDataProps } from './components/Card';
 import Pagination from './components/Pagination';
 import Search from './components/Search';
 import { Container, Content, Grid } from './styles';
 
 interface Pokemons {
   count: number;
-  results: DetailsPokemons[];
-}
-
-interface DetailsPokemons {
-  id: number;
-  name: string;
-  height: number;
-  weight: number;
-  types: {
-    slot: number;
-    type: {
-      name: string;
-    };
-  }[];
+  results: PokemonDataProps[];
 }
 
 const Home: React.FC = () => {
   const [pokemons, setPokemons] = useState<Pokemons>({} as Pokemons);
-  const [pokemon, setPokemon] = useState<DetailsPokemons>(
-    {} as DetailsPokemons,
+  const [pokemon, setPokemon] = useState<PokemonDataProps>(
+    {} as PokemonDataProps,
   );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -59,7 +46,7 @@ const Home: React.FC = () => {
     getPokemons();
   }, [offset, search]);
 
-  const renderLoagingOrDetails = loading ? (
+  const renderLoadingOrDetails = loading ? (
     <img className="loading" src={pokeball} alt="" />
   ) : (
     <Details {...{ pokemon }} />
@@ -78,13 +65,13 @@ const Home: React.FC = () => {
             <Search {...{ setSearch }} />
           </div>
           <Grid>
-            {pokemons.results?.map(({ ...attrs }, index) => (
-              <Card key={index} {...{ ...attrs, setPokemon, pokemon }} />
+            {pokemons.results?.map(({ name }, index) => (
+              <Card key={index} {...{ name, setPokemon, pokemon }} />
             ))}
           </Grid>
           <Pagination {...{ offset, setOffset }} count={142} />
         </section>
-        <section className="details">{renderLoagingOrDetails}</section>
+        <section className="details">{renderLoadingOrDetails}</section>
       </Content>
     </Container>
   );
