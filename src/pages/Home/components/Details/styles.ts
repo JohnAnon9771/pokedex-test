@@ -25,20 +25,23 @@ export const Header = styled.div`
 
   h1 {
     color: #15172b;
-    font-size: 28px;
+    font-size: 1.8rem;
   }
 `;
 
-export const Content = styled.div`
+export const Footer = styled.div`
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-start;
   align-items: flex-end;
-  height: 88%;
+  height: 365px;
+  width: auto;
 
   img {
-    height: 365px;
+    max-width: 100%;
+    max-height: 100%;
     width: auto;
+    height: auto;
   }
 `;
 

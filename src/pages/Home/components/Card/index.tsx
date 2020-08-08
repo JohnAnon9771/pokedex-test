@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 
 import api from '../../../../services/api';
 import { elementTypes } from '../../../../utils/elementTypes';
 import { capitalize } from '../../../../utils/functions/capitalize';
 import { formatNumber } from '../../../../utils/functions/formatNumber';
-import {
- Container, Types, Dot, ImageBlock, Content
-} from './styles';
+import { Container, Types, Dot, ImageBlock, Content } from './styles';
 
 interface CardComponentProps {
   name: string;
@@ -26,34 +24,29 @@ interface PokemonDataProps {
   }[];
 }
 
-const Card: React.FC<CardComponentProps> = ({
+const Card: React.FC<CardComponentProps & PokemonDataProps> = ({
   name,
   setPokemon,
-}: CardComponentProps) => {
-  const [pokemonData, setPokemonData] = useState<PokemonDataProps>(
-    {} as PokemonDataProps,
-  );
+}: CardComponentProps & PokemonDataProps) => {
+  const [data, setData] = useState<PokemonDataProps>({} as PokemonDataProps);
 
   useEffect(() => {
     async function getPokemon() {
       const response = await api.get(`pokemon/${name}`);
-      setPokemonData(response.data);
+      setData(response.data);
     }
     getPokemon();
-    setPokemon(pokemonData);
   }, [name]);
 
   return (
     <Container
-      onClick={() => setPokemon(pokemonData)}
-      border={
-        pokemonData.types && elementTypes[pokemonData.types[0]?.type.name]
-      }
+      onClick={() => setPokemon(data)}
+      border={data.types && elementTypes[data.types[0]?.type.name]}
     >
       <Content>
-        <p>{capitalize(name)}</p>
+        <p>{capitalize(data.name)}</p>
         <Types>
-          {pokemonData.types?.map(({ type }, index) => (
+          {data.types?.map(({ type }, index) => (
             <Dot key={index} style={{ background: elementTypes[type?.name] }} />
           ))}
         </Types>
@@ -62,12 +55,12 @@ const Card: React.FC<CardComponentProps> = ({
           <div>
             <p className="aboutPokemon">
               Height:
-              {formatNumber(pokemonData?.height)}
+              {formatNumber(data.height)}
               <span>m</span>
             </p>
             <p className="aboutPokemon">
               Weight:
-              {formatNumber(pokemonData?.weight)}
+              {formatNumber(data.weight)}
               <span>kg</span>
             </p>
           </div>
@@ -81,4 +74,4 @@ const Card: React.FC<CardComponentProps> = ({
   );
 };
 
-export default Card;
+export default memo(Card);

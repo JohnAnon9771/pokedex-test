@@ -2,7 +2,7 @@ import React from 'react';
 
 import { elementTypes } from '../../../../utils/elementTypes';
 import { capitalize } from '../../../../utils/functions/capitalize';
-import { Container, Header, Content, Types, Main } from './styles';
+import { Container, Header, Footer, Types, Main } from './styles';
 
 interface DetailsComponentProps {
   pokemon: {
@@ -21,6 +21,12 @@ const Details: React.FC<DetailsComponentProps> = ({
   pokemon,
 }: DetailsComponentProps) => {
   const pokemonNameCapitalized = capitalize(pokemon?.name);
+  const pokemonImage = pokemon?.name && (
+    <img
+      src={require(`../../../../assets/static/${pokemonNameCapitalized}.gif`)}
+      alt=""
+    />
+  );
   return (
     <Container>
       <Header>
@@ -37,14 +43,7 @@ const Details: React.FC<DetailsComponentProps> = ({
           ))}
         </div>
       </Main>
-      <Content>
-        {pokemon?.name && (
-          <img
-            src={require(`../../../../assets/static/${pokemonNameCapitalized}.gif`)}
-            alt=""
-          />
-        )}
-      </Content>
+      <Footer>{pokemonImage}</Footer>
     </Container>
   );
 };

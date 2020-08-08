@@ -10,12 +10,14 @@ import { Container, Content, Grid } from './styles';
 
 interface Pokemons {
   count: number;
-  results: { name: string }[];
+  results: DetailsPokemons[];
 }
 
 interface DetailsPokemons {
   id: number;
   name: string;
+  height: number;
+  weight: number;
   types: {
     slot: number;
     type: {
@@ -23,12 +25,14 @@ interface DetailsPokemons {
     };
   }[];
 }
+
 const Home: React.FC = () => {
   const [pokemons, setPokemons] = useState<Pokemons>({} as Pokemons);
   const [pokemon, setPokemon] = useState<DetailsPokemons>(
     {} as DetailsPokemons,
   );
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [search, setSearch] = useState<string | number>('');
   const [offset, setOffset] = useState(0);
 
@@ -45,14 +49,21 @@ const Home: React.FC = () => {
         });
         setPokemons(response.data);
         setLoading(true);
-      } catch (error) {
+      } catch (err) {
+        setError(true);
+        console.log(err);
       } finally {
         setLoading(false);
       }
     }
     getPokemons();
   }, [offset, search]);
-  console.log(pokemon);
+
+  const renderLoagingOrDetails = loading ? (
+    <img className="loading" src={pokeball} alt="" />
+  ) : (
+    <Details {...{ pokemon }} />
+  );
 
   return (
     <Container>
@@ -67,15 +78,13 @@ const Home: React.FC = () => {
             <Search {...{ setSearch }} />
           </div>
           <Grid>
-            {pokemons.results?.map(({ name }, index) => (
-              <Card key={index} {...{ name, setPokemon }} />
+            {pokemons.results?.map(({ ...attrs }, index) => (
+              <Card key={index} {...{ ...attrs, setPokemon, pokemon }} />
             ))}
           </Grid>
           <Pagination {...{ offset, setOffset }} count={142} />
         </section>
-        <section className="details">
-          <Details {...{ pokemon }} />
-        </section>
+        <section className="details">{renderLoagingOrDetails}</section>
       </Content>
     </Container>
   );
